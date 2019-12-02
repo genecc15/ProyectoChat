@@ -59,5 +59,30 @@ namespace ProyectoEDII.Controllers
                 }
             }
         }
+
+        public ActionResult Eliminar()
+        {
+            return View();
+        }
+
+        [HttpDelete] //Eliminacion Usuarios
+        public async Task<ActionResult> Eliminar(string User)
+        {
+            var NuevaCuenta = new Usuarios();
+            NuevaCuenta.User = User;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:51833/api/Usuarios");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                if(NuevaCuenta!=null)
+                {
+                    var response = await client.DeleteAsync("http://localhost:51833/api/Usurios" + NuevaCuenta.Id);
+                    ViewBag.Eliminado = "Registro Eliminado";
+                    return View();
+                }
+            }
+        }
     }
 }

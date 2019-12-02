@@ -7,22 +7,22 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class APIController : ControllerBase
+    public class UsuariosController : ControllerBase
     {
         private readonly UsuariosServices _UsuariosService;
 
-        public APIController(UsuariosServices usuariosServices)
+        public UsuariosController(UsuariosServices usuariosServices)
         {
             _UsuariosService = usuariosServices;
         }
 
-        //http://localhost:<port>/API/Usuarios
+        //http://localhost:<port>/api/API
         [HttpGet]
         public ActionResult<List<Usuarios>> Get() =>
             _UsuariosService.Get();
 
-        //http://localhost:<port>/API/Usuarios/id
-        [HttpGet("{id: length(24)", Name = "GetUsuarios")]
+        //http://localhost:<port>/api/id
+        [HttpGet("{id:length(24)}", Name = "GetUsuarios")]
         public ActionResult<Usuarios> Get(string id)
         {
             var Usuarios = _UsuariosService.Get(id);
@@ -40,9 +40,9 @@ namespace API.Controllers
                 
         }
 
-        //http://localhost<port>/API/Usuarios/id
+        //http://localhost<port>/api/API/id
 
-        [HttpPut("{id: length(24)}")]
+        [HttpPut("{id:length(24)}")]
 
         public IActionResult Update(string id, Usuarios UsuariosIn)
         {
@@ -57,7 +57,7 @@ namespace API.Controllers
             return Ok();
         }
         //http://localhost<port>/API/Usuarios/id
-        [HttpDelete("{id: length(24)}")]
+        [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {
             var Usuario = _UsuariosService.Get(id);

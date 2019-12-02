@@ -1,0 +1,28 @@
+﻿@model ProyectoEDII.Models.Usuarios
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+<div class="jumbotron">
+    <p class="lead">
+        @using (Html.BeginForm("Create", "Usuarios", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <h2>Nombre</h2>
+            <input type="text" name="Nombre" />
+            <br />
+            <h2>Apellido</h2>
+            <input type="text" name="Apellido" />
+            <br />
+            <h2>User</h2>
+            <input type="text" name="User" />
+            <h2>Password</h2>
+            <input type="password" name="Password" />
+            <br />
+            <input type="submit" vaalue="Crear" class="btn btn.outline-success" />
+            <div><h6 style="color:blueviolet" ;>@ViewBag.AccionIlegal</h6></div>
+        }
+    </p>
+</div>
+
+

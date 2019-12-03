@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -7,9 +8,12 @@ using ProyectoEDII.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.IO;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 namespace ProyectoEDII.Controllers
+
+
 {
     public class UsuariosController : Controller
     {
@@ -75,7 +79,40 @@ namespace ProyectoEDII.Controllers
         {
             try
             {
+                var client = new HttpClient();
+                string usuario = "https://localhost:44326/api/Usuarios/" + user;
 
+                var json = await client.GetStringAsync(usuario);
+                var Usuario = JsonConvert.DeserializeObject<Usuarios>(json);
+                if(Usuario != null)
+                {
+                    var client2 = new HttpClient();
+
+                    client2.BaseAddress = new Uri("https://localhost:44326");
+                    client2.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var token = await client2.PostAsync("api/Token", new StringContent(
+                    new JavaScriptSerializer().Serialize(Usuario), Encoding.UTF8, "application/json"));
+                if(token.IsSuccessStatusCode)
+                {
+                    ViewBag.Ingreso = "Bienvenido" + Usuario.Nombre;
+                    return RedirectToAction("Create", "Usuarios");
+                }
+                else
+                {
+                    ViewBag.Denegado = "No ha podido ingresar";
+                    return View();
+                }
+                }
+            else
+            {
+                ViewBag.Denegado = "Usuario o Contrasenia Incorrecta";
+                return View();
+            }
+            }
+                    catch
+            {
+            ViewBag.Denegado = "Usuario o Contrasenia Incorreta";
+            return View();
             }
         }
         public ActionResult Eliminar()

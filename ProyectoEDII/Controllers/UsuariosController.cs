@@ -73,10 +73,7 @@ namespace ProyectoEDII.Controllers
 
         public async Task<ActionResult> Login(string user, string password)
         {
-            try
-            {
-
-            }
+            return View();
         }
         public ActionResult Eliminar()
         {

@@ -16,14 +16,47 @@ namespace ProyectoEDII.Controllers
     public class MensajesController : Controller
     {
         // GET: Mensajes
-        public ActionResult Index()
+        /*public ActionResult Index()
         {
             return View();
+        }*/
+        [HttpGet]
+        public async Task<ActionResult> Index()//string emisor)
+        {
+            /*if (emisor == null) { }
+            else if (emisor == "") { }
+            else
+            {
+                TempData["usuario"] = emisor;
+            }*/
+
+            /*
+                 using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44326/api/Mensajes");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                using (var response = await client.PostAsJsonAsync("Mensajes", NuevoMensaje))
+                {
+             * 
+             */
+
+            Mensajes m = new Mensajes();
+            string urlGET = "https://localhost:44326/api/Mensajes";
+            var clienteGET = new HttpClient();
+            var jsonGET = await clienteGET.GetStringAsync(urlGET);
+            var mensajes = JsonConvert.DeserializeObject<List<Mensajes>>(jsonGET);
+
+            return View(mensajes);
+
         }
+
         public ActionResult Mensaje()
         {
             return View();
         }
+
         [HttpPost]//Conversacion
         public async Task<ActionResult> Mensaje(string Emisor, string Receptor, string Mensaje)
         {
@@ -187,6 +220,6 @@ namespace ProyectoEDII.Controllers
                 }
             }
         }*/
-        #endregion
+#endregion
+        }
     }
-}

@@ -182,6 +182,7 @@
     <Content Include="Views\Usuarios\Eliminar.cshtml" />
     <Content Include="Views\Usuarios\Login.cshtml" />
     <Content Include="Views\Mensajes\Mensaje.cshtml" />
+    <Content Include="Views\Mensajes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

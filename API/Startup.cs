@@ -58,7 +58,7 @@ namespace API
                 Configuration.GetSection(nameof(MensajesDatabaseSettings)));
             services.AddSingleton<IMensajesDatabaseSettings>(th =>
             th.GetRequiredService<IOptions<MensajesDatabaseSettings>>().Value);
-            services.AddSingleton<MensajesDatabaseSettings>();
+            services.AddSingleton<MensajesServices>();
         }
 
 

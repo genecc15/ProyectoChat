@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,12 +15,32 @@ namespace ProyectoEDII.Controllers
 {
     public class MensajesController : Controller
     {
-        [HttpGet]
-        public async Task<ActionResult> Index(string emisor, string receptor)
+        // GET: Mensajes
+        /*public ActionResult Index()
         {
+            return View();
+        }*/
+        [HttpGet]
+        public async Task<ActionResult> Index(string emisor)//string emisor)
+        {
+            /*if (emisor == null) { }
+            else if (emisor == "") { }
+            else
+            {
+                TempData["usuario"] = emisor;
+            }*/
 
-            if (emisor == null)
-                emisor = ViewBag.Emisor;
+            /*
+                 using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44326/api/Mensajes");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                using (var response = await client.PostAsJsonAsync("Mensajes", NuevoMensaje))
+                {
+             * 
+             */
 
             Mensajes m = new Mensajes();
             string urlGET = "https://localhost:44326/api/Mensajes";
@@ -28,11 +48,15 @@ namespace ProyectoEDII.Controllers
             var jsonGET = await clienteGET.GetStringAsync(urlGET);
             var mensajes = JsonConvert.DeserializeObject<List<Mensajes>>(jsonGET);
 
-            var mensajesFiltrados = mensajes.Where(x => x.Emisor == emisor || x.Receptor == emisor ||
-                    x.Emisor == receptor || x.Receptor == receptor);
+            var mensajesFiltrados = mensajes.Where(x => x.Emisor == emisor);
 
-            //To show all send mensajes
-            return View(mensajesFiltrados);
+        //        var exclusionKeys =
+        //exclusions.Select(x => x.compositeKey);
+        //    var resultingPersons =
+        //            persons.Where(x => !exclusionKeys.Contains(x.compositeKey));
+
+
+            return View(mensajes);
 
         }
 

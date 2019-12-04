@@ -2,6 +2,7 @@
 
 @{
     Layout = null;
+    ViewBag.Emisor = "Edgar";
 }
 
 <!DOCTYPE html>
@@ -13,8 +14,15 @@
 </head>
 <body>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "Mensaje", "Mensajes");
     </p>
+
+    @*<h2>Write EMISOR:</h2>*@
+    @*<input id="emisor" name="emisor" value="GJEIJFEI" />*@
+    <p>
+        @Html.ActionLink("Reload", "Index", "Mensajes", new {emisor="Genesis"});
+    </p>
+
     <table class="table">
         <tr>
             <th>
@@ -28,26 +36,27 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Emisor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Receptor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mensaje)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-    }
-    
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Emisor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Receptor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mensaje)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                </td>
+            </tr>
+        }
+
     </table>
 </body>
 </html>

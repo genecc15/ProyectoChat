@@ -9,34 +9,34 @@ namespace API.Services
 {
     public class MensajesServices
     {
-        private readonly IMongoCollection<Chat> _Mensajes;
-        public MensajesServices(IUsuariosDatabaseSettings settings)
+        private readonly IMongoCollection<Mensajes> _Mensajes;
+        public MensajesServices(IMensajesDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _Mensajes = database.GetCollection<Chat>(settings.UsuariosCollectionName);
+            _Mensajes = database.GetCollection<Mensajes>(settings.MensajesCollectionName);
         }
 
-        public List<Chat> Get() =>
+        public List<Mensajes> Get() =>
             _Mensajes.Find(mensaje => true).ToList();
 
-        public Chat Get(string id) =>
-            _Mensajes.Find<Chat>(mensaje => mensaje.id == id).FirstOrDefault();
+        public Mensajes Get(string id) =>
+            _Mensajes.Find<Mensajes>(mensaje => mensaje.Id == id).FirstOrDefault();
         
-        public Chat Create(Chat mensaje)
+        public Mensajes Create(Mensajes mensaje)
         {
             _Mensajes.InsertOne(mensaje);
             return mensaje;
         }
-        public void Update(string id, Chat mensajeIn) =>
-            _Mensajes.ReplaceOne(mensaje => mensaje.id == id, mensajeIn);
+        public void Update(string id, Mensajes mensajeIn) =>
+            _Mensajes.ReplaceOne(mensaje => mensaje.Id == id, mensajeIn);
 
-        public void Remove(Chat mensajeIn) =>
-            _Mensajes.DeleteOne(mensaje => mensaje.id == mensajeIn.id);
+        public void Remove(Mensajes mensajeIn) =>
+            _Mensajes.DeleteOne(mensaje => mensaje.Id == mensajeIn.Id);
 
         public void Remove(string id) =>
-            _Mensajes.DeleteOne(mensaje => mensaje.id == id);
+            _Mensajes.DeleteOne(mensaje => mensaje.Id == id);
 
     }
 }

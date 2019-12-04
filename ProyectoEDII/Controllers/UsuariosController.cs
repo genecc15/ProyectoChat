@@ -67,7 +67,8 @@ namespace ProyectoEDII.Controllers
 
         #endregion
 
-        /*[HttpGet]
+        #region Login
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
@@ -114,9 +115,9 @@ namespace ProyectoEDII.Controllers
             ViewBag.Denegado = "Usuario o Contrasenia Incorreta";
             return View();
             }
-            return View();
 
-        }*/
+        }
+        #endregion
         public ActionResult Eliminar()
         {
             return View();

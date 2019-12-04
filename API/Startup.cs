@@ -53,6 +53,12 @@ namespace API
             services.AddSingleton<IUsuariosDatabaseSettings>(sp =>
             sp.GetRequiredService<IOptions<UsuariosDatabaseSettings>>().Value);
             services.AddSingleton<UsuariosServices>();
+
+            services.Configure<MensajesDatabaseSettings>(
+                Configuration.GetSection(nameof(MensajesDatabaseSettings)));
+            services.AddSingleton<IMensajesDatabaseSettings>(th =>
+            th.GetRequiredService<IOptions<MensajesDatabaseSettings>>().Value);
+            services.AddSingleton<MensajesDatabaseSettings>();
         }
 
 
